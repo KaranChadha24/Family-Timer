@@ -1,0 +1,42 @@
+body{
+    background:linear-gradient(to bottom,#2d545e 37%,#e1b382);
+    background-repeat: no-repeat;
+    height: 100vh;   
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: -150px;
+}
+
+.image-box{
+    width: 300px;
+    height: 250px;
+    background-color: grey;
+    border: 3px solid black;
+    box-shadow : 0 4px 15px rbga(0,0,0,0.3);
+    background-size: cover;
+    background-position : center;
+    transition: all 0.3s ease-in-out;
+}
+
+.left-tilt{
+    transform: rotate(-10deg) translateY(20px) translateX(-15px);
+}
+
+.right-tilt{
+    transform: rotate(10deg) translateY(20px) translateX(15px);
+}
+
+.center{
+    transform: translateY(-10px);
+}
