@@ -12,10 +12,14 @@ body{
 }
 
 .image-container {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: -150px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: -150px;
+    margin-bottom: 150px;;
+    background-color: black;
+    height:250px;
+    width: 1500px;;
 }
 
 .image-box{
@@ -27,16 +31,4 @@ body{
     background-size: cover;
     background-position : center;
     transition: all 0.3s ease-in-out;
-}
-
-.left-tilt{
-    transform: rotate(-10deg) translateY(20px) translateX(-15px);
-}
-
-.right-tilt{
-    transform: rotate(10deg) translateY(20px) translateX(15px);
-}
-
-.center{
-    transform: translateY(-10px);
 }
