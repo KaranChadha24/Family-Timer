@@ -135,3 +135,50 @@ body{
   align-self: center;
 }
 
+.timer-input-container {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+#timeInput {
+  padding: 6px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 2px solid #e1b382;
+  background-color: #2d545e;
+  color: white;
+  width: 120px;
+  text-align: center;
+  transition: background 0.2s ease-in-out;
+}
+
+#timeInput::placeholder {
+  color: #ccc;
+}
+
+#setTimeBtn {
+  background-color: #2d545e;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #e1b382;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+#setTimeBtn:hover {
+  background-color: #e1b382;
+  color: #2d545e;
+}
+
+#timeInput:hover {
+  background-color: #e1b382;
+  color: #2d545e;
+}
+
+
