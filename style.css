@@ -1,3 +1,4 @@
+
 body {
     background: linear-gradient(to bottom, #2d545e 37%, #e1b382);
     background-repeat: no-repeat;
@@ -72,10 +73,12 @@ body {
 .image-box {
     width: 300px;
     height: 255px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: #222;
     border: 3px solid black;
-    background-size: cover;
-    background-position: center;
+    /* Updated background properties for better image fitting */
+    background-size: cover;         /* Changed from 'contain' to 'cover' */
+    background-repeat: no-repeat;     
+    background-position: center;     
     border-radius: 9px;
     transition: all 0.3s ease-in-out;
     position: relative;
@@ -92,13 +95,15 @@ body {
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    /* Add overflow hidden to ensure clean edges */
+    overflow: hidden;
 }
 
 .image-box:hover {
     transform: scale(1.02);
 }
 
-/* Color variations for different photos */
+/* Color variations for different photos - these will show as fallbacks */
 .image-box[data-img="1"] { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
 .image-box[data-img="2"] { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
 .image-box[data-img="3"] { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
@@ -113,25 +118,41 @@ body {
 .image-box[data-img="12"] { background: linear-gradient(135deg, #81c784 0%, #aed581 100%); }
 .image-box[data-img="13"] { background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%); }
 
-/* If you have actual images, uncomment and modify these lines */
-/*
-.image-box[data-img="1"] { background-image: url('img1.jpeg'); }
-.image-box[data-img="2"] { background-image: url('img2.jpeg'); }
-.image-box[data-img="3"] { background-image: url('img3.jpeg'); }
-.image-box[data-img="4"] { background-image: url('img4.jpeg'); }
-.image-box[data-img="5"] { background-image: url('img5.jpeg'); }
-.image-box[data-img="6"] { background-image: url('img6.jpeg'); }
-.image-box[data-img="7"] { background-image: url('img7.jpeg'); }
-.image-box[data-img="8"] { background-image: url('img8.jpeg'); }
-.image-box[data-img="9"] { background-image: url('img9.jpeg'); }
-.image-box[data-img="10"] { background-image: url('img10.jpeg'); }
-.image-box[data-img="11"] { background-image: url('img11.jpeg'); }
-.image-box[data-img="12"] { background-image: url('img12.jpeg'); }
-.image-box[data-img="13"] { background-image: url('img13.jpeg'); }
-*/
+/* Image background URLs */
+.image-box[data-img="1"] { background-image: url('images/img1.jpeg'); }
+.image-box[data-img="2"] { background-image: url('images/img1.jpeg'); }
+.image-box[data-img="3"] { background-image: url('images/img3.jpeg'); }
+.image-box[data-img="4"] { background-image: url('images/img4.jpeg'); }
+.image-box[data-img="5"] { background-image: url('images/img5.jpeg'); }
+.image-box[data-img="6"] { background-image: url('images/img6.jpeg'); }
+.image-box[data-img="7"] { background-image: url('images/img7.jpeg'); }
+.image-box[data-img="8"] { background-image: url('images/img8.jpeg'); }
+.image-box[data-img="9"] { background-image: url('images/img9.jpeg'); }
+.image-box[data-img="10"] { background-image: url('images/img10.jpeg'); }
+.image-box[data-img="11"] { background-image: url('images/img11.jpeg'); }
+.image-box[data-img="12"] { background-image: url('images/img12.jpeg'); }
+.image-box[data-img="13"] { background-image: url('images/img13.jpeg'); }
 
 .image-box.has-image {
     color: transparent;
+}
+
+/* Alternative approach for even better image fitting */
+.image-box.smart-fit {
+    background-size: cover;
+    background-position: center 30%; /* Slightly favor upper portion of images */
+}
+
+/* For portrait images that might need different positioning */
+.image-box.portrait-image {
+    background-size: cover;
+    background-position: center top;
+}
+
+/* For landscape images */
+.image-box.landscape-image {
+    background-size: cover;
+    background-position: center center;
 }
 
 .timer {

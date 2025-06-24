@@ -4,7 +4,30 @@ let timerInterval = null;
 const timerDisplay = document.querySelector('.timer');
 const carouselContainer = document.getElementById('carouselContainer');
 
-// Function to load actual images if they exist
+// Function to determine optimal positioning based on image aspect ratio
+function optimizeImagePosition(img, box) {
+    const imageAspectRatio = img.naturalWidth / img.naturalHeight;
+    const boxAspectRatio = 300 / 255; // width/height of .image-box
+    
+    if (imageAspectRatio > boxAspectRatio) {
+        // Image is wider than box - it's landscape
+        box.classList.add('landscape-image');
+        // For very wide images, we might want to show more of the center
+        if (imageAspectRatio > 1.8) {
+            box.style.backgroundPosition = 'center center';
+        }
+    } else {
+        // Image is taller than box - it's portrait
+        box.classList.add('portrait-image');
+        // For portrait images, slightly favor the upper portion
+        box.style.backgroundPosition = 'center 25%';
+    }
+    
+    // Apply smart-fit class for all images
+    box.classList.add('smart-fit');
+}
+
+// Enhanced function to load actual images if they exist
 function loadImages() {
     const imageBoxes = document.querySelectorAll('.image-box');
     
@@ -17,16 +40,55 @@ function loadImages() {
             box.style.backgroundImage = `url('img${imgNum}.jpeg')`;
             box.classList.add('has-image');
             box.textContent = ''; // Remove placeholder text
+            
+            // Apply smart positioning based on image dimensions
+            optimizeImagePosition(img, box);
         };
         
         img.onerror = function() {
-            // Image failed to load, keep the gradient background and text
-            console.log(`Image img${imgNum}.jpeg not found, using placeholder`);
+            // Try alternative paths/extensions
+            const alternatives = [
+                `images/img${imgNum}.jpeg`,
+                `img${imgNum}.jpg`,
+                `images/img${imgNum}.jpg`,
+                `img${imgNum}.png`,
+                `images/img${imgNum}.png`
+            ];
+            
+            tryAlternativeImages(alternatives, 0, box, imgNum);
         };
         
         // Try to load the image
         img.src = `img${imgNum}.jpeg`;
     });
+}
+
+// Function to try alternative image paths/formats
+function tryAlternativeImages(alternatives, index, box, imgNum) {
+    if (index >= alternatives.length) {
+        // All alternatives failed, keep the gradient background and text
+        console.log(`All image formats for img${imgNum} not found, using placeholder`);
+        return;
+    }
+    
+    const img = new Image();
+    
+    img.onload = function() {
+        // Alternative image loaded successfully
+        box.style.backgroundImage = `url('${alternatives[index]}')`;
+        box.classList.add('has-image');
+        box.textContent = ''; // Remove placeholder text
+        
+        // Apply smart positioning
+        optimizeImagePosition(img, box);
+    };
+    
+    img.onerror = function() {
+        // Try next alternative
+        tryAlternativeImages(alternatives, index + 1, box, imgNum);
+    };
+    
+    img.src = alternatives[index];
 }
 
 function updateTimerDisplay() {
@@ -172,9 +234,11 @@ if (timeInput) {
 // Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', () => {
     updateTimerDisplay();
-    loadImages(); // Try to load actual images
+    loadImages(); // Try to load actual images with smart fitting
     
-    console.log('Photo Timer initialized!');
+    console.log('Photo Timer initialized with smart image fitting!');
     console.log('To use your own images, place them in the same folder as your HTML file.');
     console.log('Name them: img1.jpeg, img2.jpeg, img3.jpeg, etc. (up to img13.jpeg)');
+    console.log('Supported formats: .jpeg, .jpg, .png');
+    console.log('Images will be automatically optimized for the best fit!');
 });
