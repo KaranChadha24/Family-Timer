@@ -19,7 +19,7 @@ body {
     display: flex;
     justify-content: flex-start;
     overflow: hidden;
-    margin-top: -85px;
+    margin-top: 10px;
     margin-bottom: 80px;
     height: 290px;
     width: 100%;
